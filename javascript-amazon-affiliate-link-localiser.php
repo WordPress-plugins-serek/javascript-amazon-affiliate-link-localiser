@@ -23,3 +23,12 @@ function add_12312312() {
         }
 }
 add_action('wp_enqueue_scripts', 'add_12312312');
+
+function defer_scripts( $tag, $handle, $src ){
+    if ( $handle == 'amazonAjaxLinkLocaliser-script' ) {
+        return "<script type='text/javascript' defer='defer' src='" . $src . "'></script>" . "\n";
+    }
+
+    return $tag;
+}
+add_filter( 'script_loader_tag', 'defer_scripts', 10, 3 );
